@@ -17,7 +17,7 @@ NFIRST     := 500#     smallest size to be timed.
 NLAST      := 6000#    largest size to be timed.
 NINC       := 500#     increment between sizes.
 
-LDFLAGS    := -lm -lpthread -m64
+LDFLAGS    := -lpthread -m64 -lm
 
 # indicate where the FLAME include files reside
 
