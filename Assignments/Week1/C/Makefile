@@ -1,7 +1,6 @@
 HOME       := /Users/rvdg
 BLAS_LIB   := $(HOME)/blis/lib/libblis.a
 CBLAS_INC  := $(HOME)/blis/include/blis
-LAPACK_LIB := # $(HOME)/flame/lapack-3.3.0/lapack_LINUX.a
 FLAME_LIB  := $(HOME)/flame/lib/libflame.a
 FLAME_INC  := $(HOME)/flame/include
 
@@ -9,7 +8,7 @@ FLAME_INC  := $(HOME)/flame/include
 CC         := gcc
 FC         := gfortran
 LINKER     := $(CC)
-CFLAGS     := -O3 -Wall -I$(FLAME_INC) -I$(CBLAS_INC) -m64 -msse3
+CFLAGS     := -O3 -Wall -I$(FLAME_INC) -I$(CBLAS_INC) -m64 -msse3 -std=c99
 FFLAGS     := $(CFLAGS) 
 
 # set the range of experiments to be performed
@@ -37,5 +36,3 @@ test:   driver.x
 
 clean:
 	rm -f *.o *~ core *.x output.m
-
-
