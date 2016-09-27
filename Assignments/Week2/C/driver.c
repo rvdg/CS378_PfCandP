@@ -44,7 +44,6 @@ int main(int argc, char *argv[])
   fflush( stdout );
 
   i = 1;
-  for ( irep=0; irep<nrepeats; irep++ ) {
   for ( n=nfirst; n<= nlast; n+=ninc ){
 
     /* Allocate space for the matrix and vectors */
@@ -61,26 +60,28 @@ int main(int argc, char *argv[])
     FLA_Random_matrix( xobj );
     FLA_Random_matrix( yold );
 
+    for ( irep=0; irep<nrepeats; irep++ ) {
     /* Time SymMatVec1 */
-    FLA_Copy( yold, yref );
+      FLA_Copy( yold, yref );
     
-    /* start clock */
-    dtime = FLA_Clock();
+      /* start clock */
+      dtime = FLA_Clock();
     
-    /* Compute yref = A x + y where A is symmetric stored in the
-       lower triangular part of array A, by calling SymMatVec1.  The
-       result ends up in yrefp, which we will consider to be the correct
-       result. */
-    SymMatVec_unb_var1( Aobj, xobj, yref );
+      /* Compute yref = A x + y where A is symmetric stored in the
+	 lower triangular part of array A, by calling SymMatVec1.  The
+	 result ends up in yrefp, which we will consider to be the correct
+	 result. */
+      SymMatVec_unb_var1( Aobj, xobj, yref );
+      
+      /* stop clock */
+      dtime = FLA_Clock() - dtime;
+    
+      if ( irep == 0 ) 
+	dtime_best = dtime;
+      else
+	dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
 
-    /* stop clock */
-    dtime = FLA_Clock() - dtime;
-    
-    if ( irep == 0 ) 
-      dtime_best = dtime;
-    else
-      dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
-  
     printf( "data_SymMatVec1( %d, 1:2 ) = [ %d %le ];\n", i, n,
 	    dtime_best );
     fflush( stdout );
@@ -142,7 +143,7 @@ int main(int argc, char *argv[])
 	    dtime_best, diff  );
 
     fflush( stdout );
-    
+
     FLA_Obj_free( &Aobj );
     FLA_Obj_free( &xobj );
     FLA_Obj_free( &yobj );
@@ -150,7 +151,6 @@ int main(int argc, char *argv[])
     FLA_Obj_free( &yold );
 
     i++;
-  }
   }
   FLA_Finalize( );
 
