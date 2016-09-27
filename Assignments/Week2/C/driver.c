@@ -11,9 +11,9 @@
 #define TRUE 1
 #define FALSE 0
 
-void SymMatVec1( FLA_Obj, FLA_Obj, FLA_Obj );
-void SymMatVec4( FLA_Obj, FLA_Obj, FLA_Obj );
-void SymMatVec5( FLA_Obj, FLA_Obj, FLA_Obj );
+void SymMatVec_unb_var1( FLA_Obj, FLA_Obj, FLA_Obj );
+void SymMatVec_unb_var4( FLA_Obj, FLA_Obj, FLA_Obj );
+void SymMatVec_unb_var5( FLA_Obj, FLA_Obj, FLA_Obj );
 
 int main(int argc, char *argv[])
 {
@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
   printf( "%% enter nfirst, nlast, ninc:" );
   scanf( "%d%d%d", &nfirst, &nlast, &ninc );
   printf( "%% %d %d %d \n", nfirst, nlast, ninc );
+  fflush( stdout );
 
   i = 1;
   for ( irep=0; irep<nrepeats; irep++ ) {
@@ -56,10 +57,6 @@ int main(int argc, char *argv[])
     /* Generate random matrix A */
     FLA_Random_matrix( Aobj );
 
-    printf("hi\n");
-    fflush( stdout );
- 
-   
     /* Generate random vectors x and yold */
     FLA_Random_matrix( xobj );
     FLA_Random_matrix( yold );
@@ -75,7 +72,6 @@ int main(int argc, char *argv[])
        result ends up in yrefp, which we will consider to be the correct
        result. */
     SymMatVec_unb_var1( Aobj, xobj, yref );
-
 
     /* stop clock */
     dtime = FLA_Clock() - dtime;
@@ -98,8 +94,8 @@ int main(int argc, char *argv[])
       /* start clock */
       dtime = FLA_Clock();
     
-      /* Compute yref = A x + y where A is symmetric stored in the lower triangular part of 
-	 array A, by calling SymMatVec2( ) */
+      /* Compute yref = A x + y where A is symmetric stored in the
+	 lower triangular part of array A, by calling SymMatVec2( ) */
       SymMatVec_unb_var4( Aobj, xobj, yobj );
 
       /* stop clock */

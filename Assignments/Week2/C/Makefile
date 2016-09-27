@@ -1,8 +1,8 @@
-HOME       := /u/field
+HOME       := /u/field/for_robert
 BLAS_LIB   := $(HOME)/blis/lib/libblis.a
 CBLAS_INC  := $(HOME)/blis/include/blis
-FLAME_LIB  := $(HOME)/flame/lib/libflame.a
-FLAME_INC  := $(HOME)/flame/include
+FLAME_LIB  := $(HOME)/libflame/lib/libflame.a
+FLAME_INC  := $(HOME)/libflame/include
 
 # indicate where the object files are to be created
 CC         := gcc
