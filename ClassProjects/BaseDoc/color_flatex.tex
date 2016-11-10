@@ -1,0 +1,1388 @@
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Array related wizardry
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{arydshln}
+
+\newcolumntype{I}{!{\vrule width 1.5pt}}
+
+\newlength\savedwidth 
+
+\newcommand\whline{\noalign{\global\savedwidth\arrayrulewidth 
+                            \global\arrayrulewidth 1.5pt}%
+           \hline 
+           \noalign{\global\arrayrulewidth\savedwidth}}
+
+\newcommand{\dline}{\hdashline}
+
+% ----------------------------------------------------------------
+
+% In math mode,
+% \FlaTwoByTwo{A}{B}
+%             {C}{D}
+% creates the picture 
+%   / A || B \
+%   | ==  == |
+%   \ C || D /
+
+\newcommand{\FlaTwoByTwo}[4]{
+\left(
+\begin{array}{c I c}
+#1 & #2 \\ \whline 
+#3 & #4 
+\end{array}
+\right) 
+}
+
+\newcommand{\FlaTwoByTwoNoPar}[4]{
+\begin{array}{c I c}
+#1 & #2 \\ \whline
+#3 & #4
+\end{array}
+}
+
+\newcommand{\FlaTwoByTwoSingleLineNoPar}[4]{
+\begin{array}{c | c}
+#1 & #2 \\ \hline
+#3 & #4
+\end{array}
+}
+
+\newcommand{\FlaTwoByTwoSingleLine}[4]{
+\left(
+\begin{array}{c | c}
+#1 & #2 \\ \hline
+#3 & #4
+\end{array}
+\right)
+}
+
+
+\newcommand{\FlaTwoByTwoNoLine}[4]{
+\left(
+\begin{array}{c  c}
+#1 & #2 \\
+#3 & #4
+\end{array}
+\right)
+}
+
+% In math mode,
+% \FlaTwoByOne{A}
+%             {C}
+% creates the picture
+%   / A  \
+%   | == |
+%   \ C  /
+
+\newcommand{\FlaTwoByOne}[2]{
+\left(
+\begin{array}{c}
+#1 \\ \whline
+#2
+\end{array}
+\right)
+}
+
+\newcommand{\FlaTwoByOneNoPar}[2]{
+\begin{array}{c}
+#1 \\ \whline
+#2
+\end{array}
+}
+
+% In math mode,
+% \FlaTwoByOneSingleLine{A}
+%                       {C}
+% creates the picture
+%   / A  \
+%   | -- |
+%   \ C  /
+
+\newcommand{\FlaTwoByOneSingleLine}[2]{
+\left(
+\begin{array}{c}
+#1 \\ \hline
+#2
+\end{array}
+\right)
+}
+
+\newcommand{\FlaTwoByOneSingleLineNoPar}[2]{
+\begin{array}{c}
+#1 \\ \hline
+#2
+\end{array}
+}
+
+
+\newcommand{\FlaTwoByOneNoLine}[2]{
+\left(
+\begin{array}{c}
+#1 \\
+#2
+\end{array}
+\right)
+}
+
+% In math mode,
+% \FlaOneByTwo{A}{B}
+% creates the picture
+%   ( A || B )
+
+\newcommand{\FlaOneByTwo}[2]{
+\left(
+\begin{array}{c I c}
+#1 & #2
+\end{array}
+\right)
+}
+
+\newcommand{\FlaOneByTwoNoPar}[2]{
+\begin{array}{c I c}
+#1 & #2
+\end{array}
+}
+
+\newcommand{\FlaOneByTwoSingleLine}[2]{
+\left(
+\begin{array}{c | c}
+#1 & #2
+\end{array}
+\right)
+}
+
+\newcommand{\FlaOneByTwoNoLine}[2]{
+\left(
+\begin{array}{c c}
+#1 & #2
+\end{array}
+\right)
+}
+
+% In math mode,
+% \FlaThreeByThreeTL{A}{B}{C}
+%                   {D}{E}{F}
+%                   {G}{H}{I}
+% creates the picture
+%   / A | B || C \
+%   | -- ---  -- |
+%   | D | E || F |
+%   | ==  ==  == |
+%   \ G | H || I /
+% Notice: the TL means that the
+% center block (E) is part of the
+% TL quadrant, where quadrants are
+% partitioned by the double lines.
+
+\newcommand{\FlaThreeByThreeTL}[9]{
+\left(
+\begin{array}{c | c I c}
+#1 & #2 & #3 \\ \hline
+#4 & #5 & #6 \\ \whline
+#7 & #8 & #9
+\end{array}
+\right)
+}
+
+\newcommand{\FlaThreeByThreeTLNoPar}[9]{
+\begin{array}{c | c I c}
+#1 & #2 & #3 \\ \hline 
+#4 & #5 & #6 \\ \whline 
+#7 & #8 & #9 
+\end{array}
+}
+
+% In math mode,
+% \FlaThreeByThreeBR{A}{B}{C}
+%                   {D}{E}{F}
+%                   {G}{H}{I}
+% creates the picture
+%   / A || B | C \
+%   | ==  ==  == |
+%   | D || E | F |
+%   | -- ---  -- |
+%   \ G || H | I /
+% Notice: the BR means that the
+% center block (E) is part of the
+% BR quadrant, where quadrants are
+% partitioned by the double lines.
+
+\newcommand{\FlaThreeByThreeBR}[9]{
+\left(
+\begin{array}{c I c | c}
+#1 & #2 & #3 \\ \whline 
+#4 & #5 & #6 \\ \hline 
+#7 & #8 & #9 
+\end{array}
+\right) 
+}
+
+\newcommand{\FlaThreeByThreeSingleLine}[9]{
+\left(
+\begin{array}{c | c | c}
+#1 & #2 & #3 \\ \hline
+#4 & #5 & #6 \\ \hline
+#7 & #8 & #9
+\end{array}
+\right)
+}
+
+\newcommand{\FlaThreeByThreeNoLine}[9]{
+\left(
+\begin{array}{c c c}
+#1 & #2 & #3 \\
+#4 & #5 & #6 \\
+#7 & #8 & #9
+\end{array}
+\right)
+}
+
+\newcommand{\FlaThreeByThreeBRNoPar}[9]{
+\begin{array}{c I c | c}
+#1 & #2 & #3 \\ \whline 
+#4 & #5 & #6 \\ \hline 
+#7 & #8 & #9 
+\end{array}
+}
+
+% In math mode,
+% \FlaThreeByThreeTR{A}{B}{C}
+%                   {D}{E}{F}
+%                   {G}{H}{I}
+% creates the picture
+%   / A || B | C \
+%   | -- ---  -- |
+%   | D || E | F |
+%   | ==  ==  == |
+%   \ G || H | I /
+% Notice: the TR means that the
+% center block (E) is part of the
+% TR quadrant, where quadrants are
+% partitioned by the double lines.
+
+\newcommand{\FlaThreeByThreeTR}[9]{
+\left(
+\begin{array}{c I c | c}
+#1 & #2 & #3 \\ \hline
+#4 & #5 & #6 \\ \whline
+#7 & #8 & #9
+\end{array}
+\right)
+}
+
+
+% In math mode,
+% \FlaThreeByThreeBL{A}{B}{C}
+%                   {D}{E}{F}
+%                   {G}{H}{I}
+% creates the picture
+%   / A | B || C \
+%   | ==  ==  == |
+%   | D | E || F |
+%   | -- ---  -- |
+%   \ G | H || I /
+% Notice: the BL means that the
+% center block (E) is part of the
+% BL quadrant, where quadrants are
+% partitioned by the double lines.
+
+\newcommand{\FlaThreeByThreeBL}[9]{
+\left(
+\begin{array}{c | c I c}
+#1 & #2 & #3 \\ \whline
+#4 & #5 & #6 \\ \hline
+#7 & #8 & #9
+\end{array}
+\right)
+}
+
+% In math mode,
+% \FlaOneByThreeR{A}{B}{C}
+% creates the picture
+%   ( A || B | C )
+% Notice: the R means that the
+% center block (B) is part of the
+% R(ight) submatrix, where
+% submatrices are % partitioned
+% by the double lines.
+
+\newcommand{\FlaOneByThreeR}[3]{
+\left(
+\begin{array}{c I c | c}
+#1 & #2 & #3
+\end{array}
+\right)
+}
+
+% In math mode,
+% \FlaOneByThreeL{A}{B}{C}
+% creates the picture
+%   ( A | B || C )
+% Notice: the R means that the
+% center block (B) is part of the
+% R(ight) submatrix, where
+% submatrices are % partitioned
+% by the double lines.
+
+\newcommand{\FlaOneByThreeL}[3]{
+\left(
+\begin{array}{c | c I c}
+#1 & #2 & #3
+\end{array}
+\right)
+}
+
+% In math mode,
+% \FlaThreeByOneT{A}
+%                {D}
+%                {G}
+% creates the picture
+%   / A  \
+%   | == |
+%   | B  |
+%   | -- |
+%   \ C  /
+% Notice: the T means that the
+% center block (C) is part of the
+% T(op) submatrix where submatrices
+% are % partitioned by the double
+% lines.
+
+\newcommand{\FlaThreeByOneT}[3]{
+\left(
+\begin{array}{c}
+#1 \\ \hline
+#2 \\ \whline
+#3
+\end{array}
+\right)
+}
+
+\newcommand{\FlaThreeByOneTNoPar}[3]{
+\begin{array}{c}
+#1 \\ \hline
+#2 \\ \whline
+#3
+\end{array}
+}
+
+% In math mode,
+% \FlaThreeByOneB{A}
+%                {D}
+%                {G}
+% creates the picture
+%   / A  \
+%   | -- |
+%   | B  |
+%   | == |
+%   \ C  /
+% Notice: the B means that the
+% center block (C) is part of the
+% T(op) submatrix where submatrices
+% are % partitioned by the double
+% lines.
+
+\newcommand{\FlaThreeByOneB}[3]{
+\left(
+\begin{array}{c}
+#1 \\ \whline
+#2 \\ \hline
+#3
+\end{array}
+\right)
+}
+
+\newcommand{\FlaThreeByOneBNoPar}[3]{
+\begin{array}{c}
+#1 \\ \whline
+#2 \\ \hline
+#3
+\end{array}
+}
+
+\newcommand{\FlaThreeByOneSingleLine}[3]{
+\left(
+\begin{array}{c}
+#1 \\ \hline
+#2 \\ \hline
+#3
+\end{array}
+\right)
+}
+
+\newcommand{\FlaThreeByOneNoLine}[3]{
+\left(
+\begin{array}{c}
+#1 \\
+#2 \\
+#3
+\end{array}
+\right)
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\operation}{ [ D, E, F, \ldots ] \becomes {\rm op}( A, B, C, D, \ldots ) }
+\newcommand{\routinename}{ [ D, E, F, \ldots ] \becomes {\rm op}( A, B, C, D, \ldots ) }
+\newcommand{\routinecost}{ X }
+\newcommand{\precondition}{ Q }
+\newcommand{\postcondition}{ R }
+\newcommand{\invariant}{ P }
+\newcommand{\costinv}{ \  }
+\newcommand{\costbefore}{ \  }
+\newcommand{\costafter}{ \  }
+\newcommand{\updatecost}{ \  }
+\newcommand{\guard}{ R }
+\newcommand{\partitionings}{
+\begin{minipage}{3in}
+$ S_I $
+\end{minipage}
+}
+\newcommand{\partitionsizes}{ \hspace{ 3.25in} }
+
+\newcommand{\blocksize}{1}
+
+\newcommand{\repartitionings}{
+\begin{minipage}[t]{3in}
+\ \\
+\ \\
+\ \\
+\end{minipage}
+}
+
+\newcommand{\repartitionsizes}{ \hspace{ 3.25in} }
+\newcommand{\moveboundaries}{
+\begin{minipage}[t]{3in}
+\ \\
+\ \\
+\ \\
+\end{minipage}
+}
+\newcommand{\beforeupdate}{
+$ \QBefore $
+}
+\newcommand{\afterupdate}{
+$ \QAfter $
+}
+\newcommand{\update}{%
+\begin{minipage}[t]{4in}
+$ S_U $
+\end{minipage}
+}
+
+\newcommand{\resetsteps}{
+\renewcommand{\blocksize}{1}
+\renewcommand{\operation}{ [ D, E, F, \ldots ] \becomes {\rm op}( A, B, C, D, \ldots ) }
+\renewcommand{\routinename}{ [ D, E, F, \ldots ] \becomes {\rm op}( A, B, C, D, \ldots ) }
+\renewcommand{\routinecost}{ 0 }
+\renewcommand{\precondition}{ \PPre }
+\renewcommand{\postcondition}{ \PPost }
+\renewcommand{\invariant}{ \PInv }
+\renewcommand{\costinv}{ \  }
+\renewcommand{\guard}{ G }
+\renewcommand{\partitionings}{ %
+\begin{minipage}[t]{3in}
+\ \\
+\end{minipage}
+}
+\renewcommand{\partitionsizes}{ \hspace{ 3.25in} }
+\renewcommand{\repartitionings}{%
+\begin{minipage}[t]{3in}
+\ \\
+\end{minipage}
+}
+\renewcommand{\repartitionsizes}{ \hspace{ 3.25in} }
+\renewcommand{\moveboundaries}{%
+\begin{minipage}[t]{3in}
+\ \\
+\end{minipage}
+}
+\renewcommand{\beforeupdate}{
+\QBefore 
+}
+\renewcommand{\afterupdate}{
+\QAfter 
+}
+\renewcommand{\update}{
+$ S_U $
+}
+}
+
+%%%%%%%%%%%%%%
+
+
+\newcommand{\NoShow}[1]{}
+
+
+
+\newcommand{\FlaAlgorithm}{
+\begin{tabular}{| p{0.92\textwidth}|} \hline 
+$\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \whline 
+\partitionings \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes 
+\\ 
+$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{~~~~{\bf Determine block size $ \blocksize $}\\}%
+}
+~~~~ 
+\repartitionings \\
+~~~$\mbox{\color{blue} ~~~where~}$ \repartitionsizes 
+\\ \hline 
+~~~~  \update 
+\\ \hline 
+~~~~ 
+\moveboundaries 
+\\
+$\mbox{\color{blue} endwhile} $
+\\ \hline 
+\end{tabular}
+}
+
+
+
+\newcommand{\FlaAlgorithmWithInit}{
+\begin{tabular}{| p{0.92\textwidth}|} \hline 
+$\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \whline 
+\initialize \\
+\partitionings \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes 
+\\ 
+$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{~~~~{\bf Determine block size $ \blocksize $}\\}%
+}
+~~~~ 
+\repartitionings \\
+~~~$\mbox{\color{blue} ~~~where~}$ \repartitionsizes 
+\\ \hline 
+~~~~  \update 
+\\ \hline 
+~~~~ 
+\moveboundaries 
+\\
+$\mbox{\color{blue} endwhile} $
+\\ \hline 
+\end{tabular}
+}
+
+
+
+
+\newcommand{\FlaWorksheet}{
+\begin{tabular}{| c | p{0.90\textwidth} |}\hline 
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline 
+\rowcolor{yellow!75}
+1a & $ \precondition $ 
+\\ \whline 
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+\partitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes 
+\end{minipage}
+\\ \hline 
+\rowcolor{yellow!75}
+2 & $ \invariant $ 
+\\ \hline 
+3 &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & ~~~~ $ \invariant \wedge \guard$ 
+\\ \hline 
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \blocksize $}\\}%
+}
+\repartitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \repartitionsizes 
+\end{minipage}
+\\ \hline 
+\rowcolor{yellow!75}
+6 & ~~~~ $\beforeupdate $
+\\ \hline 
+8 & ~~~~  \update 
+\\ \hline 
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\moveboundaries~
+\end{minipage}
+\\ \hline 
+\rowcolor{yellow!75}
+7 & ~~~~ $\afterupdate $
+\\ \hline 
+\rowcolor{yellow!75}
+2 & ~~~~ $ \invariant  $ 
+\\ \hline 
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline 
+\rowcolor{yellow!75}
+2,3 & $ \invariant \wedge \neg( \guard )$ 
+\\ \hline 
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline 
+\end{tabular}
+}
+
+
+\newcommand{\FlaWorksheetNine}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+\phantom{1a} & $ \phantom\precondition $ 
+\\ \whline
+\phantom{4} & 
+\begin{minipage}[t]{0.9\textwidth}%
+\partitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+\phantom{2} & $ \phantom\invariant $ 
+\\ \hline
+\phantom{3} &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+\phantom{2,3} & ~~~~ $ \phantom\invariant \phantom \wedge \phantom
+                \guard $ 
+\\ \hline
+\phantom{5a} & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \blocksize $}\\}%
+}
+\repartitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+\phantom{6} & ~~~~ $\phantom\beforeupdate $
+\\ \hline
+\phantom{8} & ~~~~  \update 
+\\ \hline
+\phantom{5b} & ~~~~ \begin{minipage}[t]{0.85\textwidth}% 
+\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+\phantom{7} & ~~~~ $\phantom\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+\phantom{2} & ~~~~ $ \phantom\invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{yellow!75}
+\phantom{2,3} & $ \phantom\invariant \wedge \neg( \phantom\guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+\phantom{1b} & $ \phantom\postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+
+\newcommand{\FlaWorksheetEight}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+1a & $ \precondition $ 
+\\ \whline
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+\partitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+2 & $ \invariant $ 
+\\ \hline
+3 &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & ~~~~ $ \invariant \wedge \guard $ 
+\\ \hline
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \blocksize $}\\}%
+}
+\repartitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+6 & ~~~~ $\beforeupdate $
+\\ \hline
+\rowcolor{orange!50}    
+8 & ~~~~  \update 
+\\ \hline
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+7 & ~~~~ $\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+2 & ~~~~ $ \invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{yellow!75}
+2,3 & $ \invariant \wedge \neg( \guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+\newcommand{\FlaWorksheetSeven}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+1a & $ \precondition $ 
+\\ \whline
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+\partitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+2 & $ \invariant $ 
+\\ \hline
+3 &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & ~~~~ $ \invariant \wedge \guard$ 
+\\ \hline
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \blocksize $}\\}%
+}
+\repartitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+6 & ~~~~ $\beforeupdate $
+\\ \hline
+8 & ~~~~  \phantom\update 
+\\ \hline
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{orange!50}    
+7 & ~~~~ $\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+2 & ~~~~ $ \invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{yellow!75}
+2 & $ \invariant \wedge \neg( \guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+
+\newcommand{\FlaWorksheetSix}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+1a & $ \precondition $ 
+\\ \whline
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+\partitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+2 & $ \invariant $ 
+\\ \hline
+3 &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & ~~~~ $ \invariant \wedge \guard $ 
+\\ \hline
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \blocksize $}\\}%
+}
+\repartitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{orange!50}   
+6 & ~~~~ $\beforeupdate $
+\\ \hline
+8 & ~~~~  \phantom\update 
+\\ \hline
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+7 & ~~~~ $\phantom\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+2 & ~~~~ $ \invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{yellow!75}
+2,3 & $ \invariant \wedge \neg( \guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+\newcommand{\FlaWorksheetFive}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+1a & $ \precondition $ 
+\\ \whline
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+\partitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+2 & $ \invariant $ 
+\\ \hline
+3 &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & ~~~~ $ \invariant \wedge \guard $ 
+\\ \hline
+\rowcolor{orange!50}   
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \blocksize $}\\}%
+}
+\repartitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+6 & ~~~~ $\phantom\beforeupdate $
+\\ \hline
+8 & ~~~~  \phantom\update 
+\\ \hline
+\rowcolor{orange!50}   
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+7 & ~~~~ $\phantom\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+2 & ~~~~ $ \invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{yellow!75}
+2,3 & $ \invariant \wedge \neg( \guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+\newcommand{\FlaWorksheetFour}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+1a & $ \precondition $ 
+\\ \whline
+\rowcolor{orange!50}   
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+\partitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+2 & $ \invariant $ 
+\\ \hline
+3 &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & ~~~~ $ \invariant \wedge \guard $ 
+\\ \hline
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \phantom\blocksize $}\\}%
+}
+$\mbox{\phantom\repartitionings}$~ \\
+$\mbox{\color{blue} ~~~where~}$ \phantom\repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+6 & ~~~~ $\phantom\beforeupdate $
+\\ \hline
+8 & ~~~~  \phantom\update 
+\\ \hline
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\phantom\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+7 & ~~~~ $\phantom\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+2 & ~~~~ $ \invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{yellow!75}
+2,3 & $ \invariant \wedge \neg( \guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+\newcommand{\FlaWorksheetThree}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+1a & $ \precondition $ 
+\\ \whline
+4 & 
+\begin{minipage}[t]{0.9\textwidth}% 
+$\mbox{\phantom{\partitionings}}$~ \\
+$\mbox{\color{blue} ~~~where~}$\phantom{\partitionsizes}  
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+2 & $ \invariant $ 
+\\ \hline
+\rowcolor{orange!50}  
+3 &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{orange!50}   
+2,3 & ~~~~ $ \invariant \wedge \guard $ 
+\\ \hline
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \phantom\blocksize $}\\}%
+}
+$\mbox{\phantom\repartitionings}$~ \\
+$\mbox{\color{blue} ~~~where~}$ \phantom\repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+6 & ~~~~ $\phantom\beforeupdate $
+\\ \hline
+8 & ~~~~  \phantom\update 
+\\ \hline
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\phantom\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+7 & ~~~~ $\phantom\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+2 & ~~~~ $ \invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{orange!50}   
+2,3 & $ \invariant \wedge \neg( \guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+
+\newcommand{\FlaWorksheetTwo}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+1a & $ \precondition $ 
+\\ \whline
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+$\mbox{\phantom{\partitionings}}$~ \\
+$\mbox{\color{blue} ~~~where~} $ \phantom{\partitionsizes} 
+\end{minipage}
+\\ \hline
+\rowcolor{orange!50} 
+2 & $ \invariant $ 
+\\ \hline
+3 &$\mbox{\color{blue}while~} \phantom\guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{orange!50} 
+2,3 & ~~~~ $ \invariant \wedge \phantom \guard $ 
+\\ \hline
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \phantom\blocksize $}\\}%
+}
+$\mbox{\phantom\repartitionings}$~ \\
+$\mbox{\color{blue} ~~~where~}$ \phantom\repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+6 & ~~~~ $\phantom\beforeupdate $
+\\ \hline
+8 & ~~~~  \phantom\update 
+\\ \hline
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\phantom\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+7 & ~~~~ $\phantom\afterupdate $
+\\ \hline
+\rowcolor{orange!50} 
+2 & ~~~~ $ \invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{orange!50} 
+2 & $ \invariant \wedge \neg( \phantom\guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+\newcommand{\FlaWorksheetOne}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{orange!50}
+1a & $ \precondition $ 
+\\ \whline
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+$\mbox{\phantom{\partitionings}}$ ~ \\
+$\mbox{\color{blue} ~~~where~}$ \phantom{\partitionsizes} 
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+2 & $ \phantom\invariant $ 
+\\ \hline
+3 &$\mbox{\color{blue}while~} \phantom\guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & ~~~~ $ \phantom\invariant \wedge \phantom \guard$ 
+\\ \hline
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \phantom\blocksize $}\\}%
+}
+$\mbox{\phantom\repartitionings}$ ~ \\
+$\mbox{\color{blue} ~~~where~}$ \phantom\repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+6 & ~~~~ $\phantom\beforeupdate $
+\\ \hline
+8 & ~~~~  \phantom\update 
+\\ \hline
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\phantom\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+7 & ~~~~ $\phantom\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+2 & ~~~~ $ \phantom\invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{yellow!75}
+2,3 & $ \phantom\invariant \wedge \neg( \phantom\guard )$ 
+\\ \hline
+\rowcolor{orange!50}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+\newcommand{\FlaWorksheetZero}{
+\begin{tabular}{| c | p{0.98\textwidth} |}\hline
+Step & $\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \hline
+\rowcolor{yellow!75}
+1a & $ \phantom\precondition $ 
+\\ \whline
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+$\mbox{\phantom{\partitionings}}$ ~ \\
+$\mbox{\color{blue} ~~~where~}$ \phantom{\partitionsizes} 
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+2 & $ \phantom\invariant $ 
+\\ \hline
+3 &$\mbox{\color{blue}while~} \phantom\guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & ~~~~ $ \phantom\invariant \wedge \phantom \guard$ 
+\\ \hline
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \phantom\blocksize $}\\}%
+}
+$\mbox{\phantom\repartitionings}$~ \\
+$\mbox{\color{blue} ~~~where~}$ \phantom\repartitionsizes
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+6 & ~~~~ $\phantom\beforeupdate $
+\\ \hline
+8 & ~~~~  \phantom\update 
+\\ \hline
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\phantom\moveboundaries~
+\end{minipage}
+\\ \hline
+\rowcolor{yellow!75}
+7 & ~~~~ $\phantom\afterupdate $
+\\ \hline
+\rowcolor{yellow!75}
+2 & ~~~~ $ \phantom\invariant  $ 
+\\ \hline
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline
+\rowcolor{yellow!75}
+2,3 & $ \phantom\invariant \wedge \neg( \phantom\guard )$ 
+\\ \hline
+\rowcolor{yellow!75}
+1b & $ \postcondition $ 
+\\ \hline
+\end{tabular}
+}
+
+
+
+\newcommand{\FlaThreeByThreeTLtoBR}[1]{
+\left(
+\begin{array}{c I c | c}
+#1_{TL} & #1_{TM} & #1_{TR} \\ \whline 
+#1_{ML} & #1_{MM} & #1_{MR} \\ \hline 
+#1_{BL} & #1_{BM} & #1_{BR} 
+\end{array}
+\right) 
+}
+
+\newcommand{\FlaFourByFourTLtoBR}[1]{
+\left(
+\begin{array}{c I c |  c :  c}
+#1_{00} & #1_{01} & #1_{02} & #1_{03} \\ \whline 
+#1_{10} & #1_{11} & #1_{12} & #1_{13} \\ \hline 
+#1_{20} & #1_{21} & #1_{22} & #1_{23} \\ \dline 
+#1_{30} & #1_{31} & #1_{32} & #1_{33} 
+\end{array}
+\right) 
+}
+
+
+
+\newcommand{\FlaThreeByThreeTLtoBRmove}[1]{
+\left(
+\begin{array}{c I c | c}
+#1_{TL} & #1_{TM} & #1_{TR} \\ \whline 
+#1_{ML} & #1_{MM} & #1_{MR} \\ \hline 
+#1_{BL} & #1_{BM} & #1_{BR} 
+\end{array}
+\right) 
+}
+
+\newcommand{\FlaFourByFourTLtoBRmove}[1]{
+\left(
+\begin{array}{c  c I c | c}
+#1_{00} & #1_{01} & #1_{02} & #1_{03} \\ 
+#1_{10} & #1_{11} & #1_{12} & #1_{13} \\ \whline 
+#1_{20} & #1_{21} & #1_{22} & #1_{23} \\ \hline 
+#1_{30} & #1_{31} & #1_{32} & #1_{33} 
+\end{array}
+\right) 
+}
+
+\newcommand{\TBTinitialize}{}
+\newcommand{\FlaAlgorithmTBT}{
+\begin{tabular}{|l|} \hline
+$\mbox{\color{blue}Algorithm:~}\routinename$
+\\ \whline
+\partitionings \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes 
+\\ 
+\TBTinitialize\\
+$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{~~~~{\bf Determine block size $ \blocksize $}\\}%
+}
+~~~~ 
+\repartitionings \\
+~~~$\mbox{\color{blue} ~~~where~}$ \repartitionsizes
+\\ \hline
+~~~~  \update 
+\\ \hline
+~~~~ 
+\moveboundaries 
+\\
+$\mbox{\color{blue} endwhile} $
+\\ \hline 
+\end{tabular}
+}
+
+
+
+\newcommand{\BRTL}[1]{\begin{array}{@{}c@{}}{\cellcolor{green!50} #1_{BR}}\end{array}}
+\newcommand{\BRTR}[1]{\begin{array}{@{}c@{}}{\cellcolor{yellow!50} #1_{BR}}\end{array}}
+\newcommand{\BRBL}[1]{\begin{array}{@{}c@{}}{\cellcolor{blue!50} #1_{BR}}\end{array}}
+\newcommand{\BRBR}[1]{\begin{array}{@{}c@{}}{\cellcolor{gray!50} #1_{BR}}\end{array}}
+
+\newcommand{\TRL}[1]{\begin{array}{@{}c@{}}{\cellcolor{yellow!50}
+                       #1_{TR}}\end{array}}
+\newcommand{\TRR}[1]{\begin{array}{@{}c@{}}{\cellcolor{blue!50} #1_{TR}}\end{array}}
+
+\newcommand{\BLT}[1]{\begin{array}{@{}c@{}}{\cellcolor{yellow!50}
+                       #1_{BL}}\end{array}}
+\newcommand{\BLB}[1]{\begin{array}{@{}c@{}}{\cellcolor{blue!50} #1_{BL}}\end{array}}
+
+
+
+\newcommand{\worksheetwithcost}{
+\begin{tabular}{| c | p{0.90\textwidth} |}\hline 
+Step & $\mbox{\color{blue}Cost Analysis:~}\routinename$
+\\ \hline 
+\rowcolor{yellow!75}
+1a & 
+\multicolumn{1}{r|}{\WScostzero }
+\\ \whline 
+4 & 
+\begin{minipage}[t]{0.9\textwidth}%
+\partitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \partitionsizes 
+\end{minipage}
+\\ \hline 
+\rowcolor{yellow!75}
+2 & \multicolumn{1}{r|}{\WScostinv}  
+\\ \hline 
+3 &$\mbox{\color{blue}while~} \guard \mbox{~\color{blue} do}$
+\\ \hline 
+\rowcolor{yellow!75}
+2,3 & %~~~~ $ \invariant \wedge \guard$ 
+\multicolumn{1}{r|}{\WScostinv}
+\\ \hline 
+5a & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\ifthenelse{\equal{\blocksize}{1}}{}%
+{%
+\ifthenelse{ \equal{\blocksize}{blank} }{}%
+{{\bf Determine block size $ \blocksize $}\\}%
+}
+\repartitionings~ \\
+$\mbox{\color{blue} ~~~where~}$ \repartitionsizes 
+\end{minipage}
+\\ \hline 
+\rowcolor{yellow!75}
+6 & %~~~~ $\beforeupdate $
+\multicolumn{1}{r|}{\WScostbu}
+\\ \hline 
+8 & ~~~~  \update 
+\\ \hline 
+5b & ~~~~ \begin{minipage}[t]{0.85\textwidth}%
+\moveboundaries~
+\end{minipage}
+\\ \hline 
+\rowcolor{yellow!75}
+7 & %~~~~ $\afterupdate $
+\multicolumn{1}{r|}{\WScostau}
+\\ \hline 
+\rowcolor{yellow!75}
+2 & %~~~~ $ \invariant  $ 
+\multicolumn{1}{r|}{\WScostinv}
+\\ \hline 
+ &$\mbox{\color{blue} endwhile} $
+\\ \hline \whline 
+\rowcolor{yellow!75}
+2,3 & %$ \invariant \wedge \neg( \guard )$ 
+\multicolumn{1}{r|}{\WScostinv}
+\\ \hline 
+\rowcolor{yellow!75}
+1b & %$ \postcondition $ 
+\multicolumn{1}{r|}{{\bf Total Cost:} $\routinecost $ flops}
+\\ \hline 
+\end{tabular}
+}
+
+
+\newcommand{ \PPre }{ P_{\it pre} }
+\newcommand{ \PPost }{ P_{\it post} }
+\newcommand{ \PInv }{ P_{\it inv} }
+\newcommand{ \PInvone }{ P_{\it inv-1} }
+\newcommand{ \PInvtwo }{ P_{\it inv-2} }
+\newcommand{ \QBefore }{ P_{\it before} }
+\newcommand{ \QAfter }{ P_{\it after} }
+\newcommand{ \Qbefore }{ P_{\it before} }
+\newcommand{ \Qafter }{ P_{\it after} }
+\newcommand{ \PCons }{ P_{\it cons} }
+\newcommand{ \PCost }{ P_{\it cost} }
+\newcommand{ \PStr }{ P_{\it struct} }
+\newcommand{ \Csf }{ C_{\it sf} }

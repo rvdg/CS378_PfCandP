@@ -1,0 +1,56 @@
+\chapter{Cases}
+Triangular solve with multiple right-hand sides  ({\sc Trsm}) 
+is a matrix-matrix multiplication in disguise:
+Not only is one of the matrices square and (lower or upper) triangular, but in addition, one multiplies with the inverse of the matrix.
+
+The full set of 
+{\sc Trsm} cases 
+is denoted by {\sc Trsm\_$\Box \Box \Box \Box $}, 
+where the letters in the four boxes denote whether the 
+triangular matrix is on the {\sc l}eft or {\sc r}ight,
+is {\sc l}ower or {\sc u}pper triangular, 
+is {\sc n}ot transposed or {\sc t}ransposed, 
+and has a {\sc n}onunit or {\sc u}nit diagonal:
+\[
+\begin{array}{c |  c   |   c  | c | c |} \cline{2-5}
+&
+{\mbox{\sc l} \mbox{\sc l} \Box \Box }
+&
+{\mbox{\sc l} \mbox{\sc u} \Box \Box }
+&
+{\mbox{\sc r} \mbox{\sc l} \Box \Box }
+&
+{\mbox{\sc r} \mbox{\sc u} \Box \Box }
+  \\
+\hline
+\multicolumn{1}{|c |}{ \Box \Box \mbox{\sc n} \Box} & B := L^{-1} B & B := U{-1} B & B := B L^{-1} & B := B U^{-1} \\
+\hline
+\multicolumn{1}{|c |}{ \Box \Box \mbox{\sc t} \Box} & B := L^{-T} B & B :: U^{-T} B & B := B L^{-T} & B := B U^{-T} \\
+\hline
+\end{array}
+\]
+We will only consider the case where we compute with the diagonal.
+
+Where does the name {\em triangular solve with multiple right-hand sides} come from?
+If one wants to compute $ B := A^{-1} B $ one can also think of this as solving $ A X = B $, overwriting the matrix $ A $ with the solution matrix $ X $.  Now, partition $ X $ and $ B $ by columns.  Then
+\[
+\begin{array}[t]{c}
+\underbrace{
+	A \left( \begin{array}{c | c | c | c}
+x_0 & x_1 & \cdots & x_{n-1}
+\end{array}\right)
+}
+\\
+\left( \begin{array}{c | c | c | c}
+A x_0 & A x_1 & \cdots & A x_{n-1}
+\end{array}\right)
+\end{array}
+=
+\left( \begin{array}{c | c | c | c}
+b_0 & b_1 & \cdots & b_{n-1}
+\end{array}\right)
+\]
+and hence, for each column $ j $, 
+$ A x_j = b_j $.  This means that one can instead
+solve with matrix $ A $, and because $ B $ has many columns, this becomes a {\em solve with multiple right-hand sides}.  If $ A $ is triangular, then 
+it is a {\em triangular solve with multiple right-hand sides}.  Importantly, the inverse of the matrix is never computed.

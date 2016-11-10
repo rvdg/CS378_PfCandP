@@ -1,0 +1,200 @@
+\documentclass[twoside,openright,12pt]{book}
+
+% ----------------------------------------------------------------
+% \usepackage{apacite} %apa citation style
+\bibliographystyle{apacite}
+
+\usepackage{pslatex}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{subeqn}
+\usepackage{multirow}
+\usepackage{amssymb}
+%% \usepackage{program}
+\usepackage{ifthen}
+\usepackage{color}
+\usepackage{boxedminipage}
+\usepackage{fancyvrb}
+\usepackage[dotinlabels]{titletoc}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{wrapfig}
+\usepackage{moreverb}
+\usepackage[sf,bf]{titlesec}
+\usepackage[Lenny]{fncychap}
+\usepackage{tikz}
+\usetikzlibrary{arrows,matrix,decorations.pathreplacing,shapes,backgrounds}
+\usepackage{textcomp}
+\usepackage{minitoc}
+\usepackage{pifont}
+\usepackage{hyperref}
+\usepackage{xr}
+\externaldocument[Code-]{Supplement}
+%% \usepackage[nottoc]{tocbibind}
+\usepackage[totoc]{idxlayout}
+\usepackage{dirtree}
+\usepackage{listings}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code 
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace 
+  breaklines=true,                 % sets automatic line breaking 
+  captionpos=b,                    % sets the caption-position to bottom 
+  commentstyle=\color{mygreen},    % comment style 
+  deletekeywords={...},            % if you want to delete keywords from the given language 
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code 
+%  extendedchars=true,              % lets you use non-ASCII 
+%  characters; for 8-bits encodings only, does not work with UTF-8 
+  frame=single,                    % adds a frame around the code 
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible) 
+  keywordstyle=\color{blue},       % keyword style 
+  language=Octave,                 % the language of the code 
+  morekeywords={*,...},            % if you want to add more keywords to the set 
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right) 
+  numbersep=5pt,                   % how far the line-numbers are from the code 
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers 
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here)) 
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces' 
+  showstringspaces=false,          % underline spaces within strings only 
+  showtabs=false,                  % show tabs within strings adding particular underscores 
+%   stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered 
+  stringstyle=\color{mymauve},     % string literal style 
+  tabsize=2,                       % sets default tabsize to 2 spaces 
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title 
+}
+
+\renewcommand{\mtctitle}{}
+\nomtcrule
+
+% \setcounter{tocdepth}{1}
+
+\renewcommand{\em}{\it}   % package ulem underlines \em, so this fixes that.
+\newcommand{\sout}[1]{{\color{gray} #1}}
+\renewcommand{\arraystretch}{1.4}
+
+\newboolean{ShowAnswers}
+\newboolean{WithAnswers}
+\newboolean{ShowFrontBack}
+\newboolean{edX}
+\newboolean{AnswersSeparated}
+\newboolean{MatlabVersion}
+\newboolean{PythonVersion}
+
+\newboolean{FreeVersion}
+\setboolean{FreeVersion}{false}
+
+\renewcommand{\chaptername}{Chapter}
+
+% ----------------------------------------------------------------
+
+% Our packages
+\usepackage{amssymb}
+% \usepackage{graphicx} % already in SIAM
+%%% \usepackage{program}
+\newcommand{\R}{\mathbb{R}}
+\newenvironment{proof}{}{}
+\newcommand{\intersect}{\cap}
+\newcommand{\union}{\cup}
+\newcounter{programline}
+\newcommand{\gt}{>}
+\newcommand{\lt}{<}
+\usepackage{ifthen}
+\usepackage{color}
+\usepackage{boxedminipage}
+% \usepackage[Lenny]{fncychap} % Not necessary with SIAM style
+% \usepackage{fancyhdr} % Not necessary with SIAM style
+\usepackage{fancyvrb}
+% \usepackage{mparhack}
+% \usepackage{chappg} % Not necessary with SIAM style
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{soul}
+% \usepackage{graphics}
+\usepackage{moreverb}
+\usepackage{fancyhdr}
+\usepackage[sf,bf]{titlesec}
+\usepackage[Lenny]{fncychap}
+
+\hypersetup{colorlinks=true,
+  linkbordercolor=red,
+  linkcolor=blue,
+  urlbordercolor=red,
+  urlcolor=red,
+  pdfborderstyle={/S/U/W 2}}
+
+
+\renewcommand{\arraystretch}{1.4}
+
+\newcommand{\newoddside}{
+	\ifthenelse{\not{\isodd{\thepage}}}{\newpage}{
+	\newpage
+        \phantom{placeholder} % doesn't appear on page
+	\thispagestyle{empty} % if want no header/footer
+	\newpage
+	}
+}
+%%% \usepackage[dvips,dvipdf,backref,colorlinks,bookmarksopen,bookmarksnumbered,citecolor=blue,urlcolor=blue,backref]{hyperref}
+
+\ChTitleVar{\sffamily \bfseries \Huge} % From fncychap package
+\titleformat*{\section}{\sffamily \bfseries \Large}    % From titlesec package
+\titleformat*{\subsection}{\sffamily \bfseries \large} % From titlesec package
+
+\makeindex
+
+% \newcommand{\ClickToLAFF}{
+% \hypersetup{colorlinks=true,linkbordercolor=white,linkcolor=white,pdfborderstyle={/S/U/W 1}}
+% \href{\coursepath\WeekOneSectionOne\UnitThree}{
+% \framebox{\includegraphics[width=0.7\textwidth]{ToEdx.pdf}}}
+% \vspace{-.15in}
+% }
+
+\newcommand{\currentpath}{}
+
+\newcommand{\ToEdX}[1]{
+\renewcommand{\currentpath}{
+\vspace{0.2in}
+\href{\coursepath#1}{
+\includegraphics[width=\textwidth]{ToEdx.pdf}
+}
+}
+}
+
+% ----------------------------------------------------------------
+
+% Our macros
+%\input{macros}
+\input MOOC_macros
+
+\renewcommand{\hat}{\widehat}
+\renewcommand{\em}{\it}
+
+% Page size
+\setlength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{-0.25in}
+\setlength{\textheight}{9.25in}
+\setlength{\textwidth}{7in}
+\setlength{\topmargin}{-0.5in}
+
+\newcommand{\mynewpage}{}
+\newcommand{\mynewpageafterchapter}{}
+
+\newcommand{\ShowFront}{}
+
+
+% ----------------------------------------------------------------
+
+
+\begin{document}
+	
+\chapter{My Project}
+
+\input op
+
+\end{document}
+

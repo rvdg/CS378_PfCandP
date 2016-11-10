@@ -1,0 +1,520 @@
+% \input flatex_color
+\input color_flatex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands to typeset vectors and matrices conveniently
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\defcolvector}[2]{
+\left( 
+\begin{array}{c}
+#1_0 \\ 
+#1_1 \\ 
+\vdots \\ 
+#1_{#2-1}
+\end{array} 
+\right)
+}
+
+
+\newenvironment{MatrixC}
+{
+\left(
+\begin{array}{ccccc}
+}
+{
+\end{array}
+\right)
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands to typeset special math symbols
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\R}{\mathbb{R}}
+\newcommand{\Nmbr}{{{{N}\hspace{-0.15in}I\hspace{0.1in}}}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\Rn}{\R^{n}}
+\newcommand{\Rm}{\R^{m}}
+\newcommand{\Rmxn}{\R^{m \times n}}
+\newcommand{\Rnxn}{\R^{n \times n}}
+\newcommand{\Rnxm}{\R^{n \times m}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands for different vector and matrix operations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\scopy}{\mbox{\sc copy}}
+\newcommand{\scal}{\mbox{\sc scal}}
+\newcommand{\add}{\mbox{\sc add}}
+\newcommand{\axpy}{\mbox{\sc axpy}}
+\newcommand{\sdot}{\mbox{\sc dot}}
+
+\newcommand{\gemv}{\mbox{\sc gemv}}
+\newcommand{\trmv}{\mbox{\sc trmv}}
+\newcommand{\symv}{\mbox{\sc symv}}
+\newcommand{\ger}{\mbox{\sc ger}}
+\newcommand{\syr}{\mbox{\sc syr}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bunch of theorem environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{homeworkcounter}
+
+\newtheorem{theorem}{Theorem}[chapter] % already in SIAM macros
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{exercise}{Homework}
+\renewcommand{\theexercise}{\thesubsection.\arabic{homeworkcounter}}
+\newtheorem{challenge}{Challenge}
+\renewcommand{\thechallenge}{\thesubsection.\arabic{homeworkcounter}}
+\newtheorem{practice}{Practice}
+\renewcommand{\thepractice}{\thesubsection.\arabic{homeworkcounter}}
+\newtheorem{ASN}{Homework}
+\renewcommand{\theASN}{\thesubsection.\arabic{homeworkcounter}}
+\newtheorem{example}[theorem]{Example}
+\newcommand{\norm}{\mbox{\sc norm2}}
+
+\renewenvironment{proof}{\noindent
+\begin{center}
+\setlength{\unitlength}{\textwidth}
+\begin{picture}(1,0)
+\thicklines
+\put(0,0){\line(1,0){1}}
+\end{picture}
+\end{center}
+{\bf Proof:}}
+{
+\vspace{-0.1in}
+\begin{center}
+\setlength{\unitlength}{\textwidth}
+\begin{picture}(1,0)
+\thicklines
+\put(0,0){\line(1,0){1}}
+\end{picture}
+\vspace{0.1in}
+\end{center}
+}
+
+
+\newcommand{\Answer}[1]{%
+\ifthenelse{\boolean{ShowAnswers}}{%
+{\color{blue}%
+\vspace{0.05in}%
+\noindent%
+{\bf Answer:} #1}}
+{}%
+}
+
+\newcommand{\PartAnswer}[1]{%
+\ifthenelse{\boolean{ShowAnswers}}{%
+{\color{blue} #1}}%
+{}
+}
+
+
+\newcommand{\QuestionAnswer}[2]{%
+\ifthenelse{\boolean{ShowAnswers}}{%
+{\color{blue} #2}}%
+{\color{black} #1}
+}
+
+
+\newcommand{\ShowAnswer}[1]{
+\ifthenelse{\boolean{ShowAnswers}}{
+{\color{blue} #1}}
+{\phantom{#1}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commands for putting a box around various things
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{boxedremark}{
+\vspace{0.1in}
+\noindent
+\begin{tabular}{I p{0.99\textwidth} I}  \whline
+\rowcolor[gray]{1.0}
+\begin{minipage}{6.75in}
+\vspace{0.1in}
+\color{red}
+% \begin{remark}
+\rm 
+}
+{
+% \end{remark}
+\vspace{0.1in}
+\end{minipage}
+\\ \whline
+\end{tabular}
+}
+
+\newenvironment{boxedcode}{
+\vspace{0.05in}
+\noindent
+\begin{tabular}{I p{0.99\textwidth} I}  \whline
+\rowcolor[gray]{1.0}
+\begin{minipage}{0.99\textwidth}
+\vspace{0.05in}
+%\begin{verbatim}
+\rm 
+}
+{
+%\end{verbatim}
+\vspace{-0.1in}
+\end{minipage}
+\\ \whline
+\end{tabular}
+}
+
+\newenvironment{boxedexerciseanswercontinued}{
+% \ifthenelse{\boolean{ShowAnswers}}{
+\vspace{0.1in}
+\noindent
+\begin{tabular}{I p{0.99\textwidth} I}  \whline
+\rowcolor[gray]{1.0}
+\begin{minipage}{6.3in}
+\vspace{0.1in}
+% \begin{remark}
+\rm 
+}
+% }
+{
+% \ifthenelse{\boolean{ShowAnswers}}{
+% \end{remark}
+\end{minipage}
+\\ \whline
+\end{tabular}
+%}
+}
+
+\newenvironment{boxedexercise}{
+\addtocounter{homeworkcounter}{1}
+\noindent
+\begin{tabular}{@{}I p{0.97\textwidth} I}  \whline
+\begin{minipage}{0.97\textwidth}
+\vspace{0.1in}
+\begin{exercise}
+\rm 
+}
+{
+\end{exercise}%
+\vspace{-0.1in}%
+\end{minipage} 
+\\ \hline
+\end{tabular}
+}
+
+\newenvironment{unboxedexercise}{
+\addtocounter{homeworkcounter}{1}%
+\noindent%
+\begin{exercise}
+\rm 
+}
+{
+\end{exercise}%
+}
+
+
+\newenvironment{boxedchallenge}{
+\addtocounter{homeworkcounter}{1}
+\noindent
+\begin{tabular}{I p{0.99\textwidth} I}  \whline
+\begin{minipage}{6.3in}
+\vspace{0.1in}
+\begin{challenge}
+\rm 
+}
+{
+\end{challenge}%
+\vspace{-0.1in}%
+\end{minipage} 
+\\ \hline
+\end{tabular}
+}
+
+\newenvironment{boxedexample}{
+\noindent
+\begin{tabular}{I p{0.99\textwidth} I}  \whline
+\begin{minipage}{6.3in}
+\vspace{0.1in}
+\begin{example}
+\rm 
+}
+{
+\end{example}
+\vspace{0.1in}
+\end{minipage} 
+\\ \hline
+\end{tabular}
+}
+
+\newenvironment{boxedpractice}{
+% \addtocounter{homeworkcounter}{1}
+\noindent
+\begin{tabular}{I p{0.99\textwidth} I}  \whline
+\begin{minipage}{6.3in}
+\vspace{0.1in}
+{\bf Try this!}
+\rm 
+}
+{
+\vspace{0.1in}
+\end{minipage} 
+\\ \hline
+\end{tabular}
+}
+
+
+\newenvironment{boxedASN}{
+\addtocounter{homeworkcounter}{1}
+\noindent
+\begin{tabular}{I p{0.99\textwidth} I}  \whline
+\begin{minipage}{6.3in}
+\vspace{0.1in}
+\begin{ASN}
+\rm 
+}
+{
+\end{ASN}
+\vspace{0.1in}
+\end{minipage} 
+\\ \hline
+\end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Array related wizardry
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NoShow{
+	\newcolumntype{I}{!{\vrule width 1.5pt}}
+\newlength\savedwidth
+\newcommand\whline{\noalign{\global\savedwidth\arrayrulewidth
+                            \global\arrayrulewidth 1.5pt}%
+           \hline
+           \noalign{\global\arrayrulewidth\savedwidth}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simplify typesetting matrices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ThreeVectorR}[3]
+{
+\left(
+\begin{array}{r}
+#1 \\
+#2 \\
+#3
+\end{array}
+\right)
+}
+
+
+\newenvironment{MatrixR}
+{
+\left(
+\begin{array}{rrrrr}
+}
+{
+\end{array}
+\right)
+}
+
+
+\newcommand{\row}[1]{\check{#1}}
+\newcommand{\tr}[1]{{#1}^{\mathrm{T}}}
+\newcommand{\tri}[1]{{#1}^{\mathrm{-T}}}
+\newcommand{\tc}[1]{{#1}^{\mathrm{H}}}
+\newcommand{\op}[1]{{\mathrm{op}(#1)}}
+
+\newcommand{\defmatrix}[3]{
+\left( 
+\begin{array}{c c c c}
+#1_{00}     & #1_{01}      & \ldots & #1_{0,#3-1} \\ 
+#1_{10}     & #1_{11}      & \ldots & #1_{1,#3-1} \\ 
+\vdots      & \vdots       & \ddots & \vdots    \\ 
+#1_{#2-1,0} & #1_{#2-1,1}  & \ldots & #1_{#2-1,#3-1} \\ 
+\end{array} 
+\right)
+}
+
+
+\newcommand{\resetcounters}{
+%\setcounter{remark}{0}
+%\setcounter{mydefinition}{0}
+\setcounter{homeworkcounter}{0}
+}
+
+\newcommand{\newpagebreak}{}
+
+
+%\newcommand{\graynine}{0.9}
+\newcommand{\graynine}{1.0}
+%\newcommand{\grayeight}{0.8}
+\newcommand{\grayeight}{1.0}
+
+
+\newcommand{\Null}{{\cal N}}
+\newcommand{\Col}{{\cal C}}
+\newcommand{\Rowspace}{{\cal R}}
+\newcommand{\Span}{\mbox{\cal Span}}
+\newcommand{\rank}{\mbox{\rm rank}}
+
+\newcommand{\becomes}{:=}
+
+\newcommand{\CurrentSection}{}
+
+\newcommand{\CurrentUnit}{\CurrentSection\arabic{subsection}}
+
+\newcommand{\VideoWidth}{2.25in}
+
+\newcommand{\PlaceVideo}[1]{
+\mbox{~} \hfill ~ #1
+}
+
+
+\newcommand{\EXERCISE}[3]{
+\begin{boxedexercise}
+%%% \label{#1}
+\hypertarget{#1}{}
+
+{#2}
+
+%%%\mbox{~}\hfill {ANSWER \ding{42}~\ref{Ans-#3}}
+%% \mbox{~}\hfill ANSWER \ding{42}~\ref{#3}
+\ifthenelse{\boolean{edX}}{}{
+%\ifthenelse{\boolean{ShowAnswers}}
+{
+\mbox{~} \hfill \hyperlink{#3}{\ding{42} SEE ANSWER}}{
+}
+}
+
+\end{boxedexercise}
+}
+
+\newcommand{\edX}[1]{
+\ifthenelse{\boolean{edX}}{
+#1}{}}
+
+\newcommand{\LAFF}[1]{
+\ifthenelse{\boolean{edX}}{}{
+#1}}
+
+
+\newcommand{\ANSWER}[3]{
+\begin{unboxedexercise}
+%%% \label{#1}
+\hypertarget{#1}{}
+
+{#2}
+
+%%% \mbox{~} \hfill {BACK TO TEXT \ding{42}~\ref{Notes-#3}}
+%%% \mbox{~} \hfill BACK TO TEXT \ding{42}~\ref{#3}
+
+
+\ifthenelse{\boolean{AnswersSeparated}}
+{\newpage}
+{\mbox{~} \hfill \hyperlink{#3}{\ding{42} BACK TO TEXT}}
+
+\end{unboxedexercise}
+}
+
+
+\newcommand{\separator}{\item}
+
+\newcommand{\matlabversion}[1]{%
+\ifthenelse{\boolean{MatlabVersion}}{#1}{}}
+
+\newcommand{\pythonversion}[1]{%
+\ifthenelse{\boolean{PythonVersion}}{{\color {blue} #1}}{}}
+
+%\newcommand{\matlab}{{\sc Matlab}\textsuperscript{\textregistered}}
+\newcommand{\matlab}{{\sc Matlab}}
+\newcommand{\mathworks}{{\sc MathWorks}\textsuperscript{\textregistered}}
+
+\newcommand{\CW}{{\tt Command Window}}
+
+\newcommand{\laffpath}{LAFFSpring2015 -> Code -> laff}
+\newcommand{\downloadpage}{Fill in download page in MOOC\_macros.tex}
+
+\newenvironment{codeexample}
+{
+\begin{quote}
+}
+{
+\end{quote}
+}
+
+
+% Operation names 
+\newcommand{\sapdot}{\mbox{\sc apdot}}
+\newcommand{\saxpy}{\mbox{\sc axpy}}
+\newcommand{\matvec}{\mbox{\sc gemv}}
+\newcommand{\vecmat}{\mbox{\sc gevm}}
+\newcommand{\rankone}{\mbox{\sc ger}}
+\newcommand{\trsv}{\mbox{\sc trsv}}
+\newcommand{\matmat}{\mbox{\sc gemm}}
+\newcommand{\symm}{\mbox{\sc symm}}
+\newcommand{\trmm}{\mbox{\sc trmm}}
+\newcommand{\trsm}{\mbox{\sc trsm}}
+\newcommand{\syrk}{\mbox{\sc syrk}}
+
+\newcommand{\gemm}{\mbox{\sc gemm}}
+
+\newcommand{\equals}{=}
+
+\newcommand{\implies}{\Rightarrow}
+
+
+\newcommand{\Square}{ \mbox{Square} }
+\newcommand{\Symm}{ \mbox{Symm} }
+\newcommand{\SameSize}{ \mbox{SameSize} }
+\newcommand{\RowDim}{\mbox{RowDim}}
+\newcommand{\ColDim}{\mbox{ColDim}}
+\newcommand{\LowTr}{\mbox{LowTr}}
+\newcommand{\UpTr}{\mbox{UpTr}}
+\newcommand{\UpperTr}{\mbox{UpTr}}
+\newcommand{\UppTr}{\mbox{UpTr}}
+
+\newcommand{\initialize}{}
+
+\newcommand{\true}{{\em T}}
+\newcommand{\false}{{\em F}}
+
+\newcommand{\proofline}[1]{~~~~~~ #1}
+\newcommand{\equivto}[1]{\Leftrightarrow \mbox{$<$ #1 $>$}}
+\newcommand{\impliesnext}[1]{\Rightarrow \mbox{$<$ #1 $>$}}
+
+\newcommand{\skipcommand}{{\bf skip}}
+\newcommand{\abort}{{\bf abort}}
+\renewcommand{\wp}{{\em wp}}
+
+\newcommand{\leftdq}{\mbox{``}}
+\newcommand{\rightdq}{\mbox{''}}
+
+\newcommand{\Eone}{\mbox{E1}}
+\newcommand{\Etwo}{\mbox{E2}}
+\newcommand{\Ethree}{\mbox{E3}}
+
+\newcommand{\IF}{{\bf if}}
+\newcommand{\FI}{{\bf endif}}
+
+\newcommand{\ifbox}{{
+		\setlength{\unitlength}{1em}
+		\begin{picture}(0.25,0.75) 
+	\put(0,0){\framebox(0.25,0.75){}}
+	\end{picture}}}
+
+\newcommand{\emptyifbox}{{
+		\setlength{\unitlength}{1em}
+		\begin{picture}(0.25,0.75) 
+	\put(0,0){\makebox(0.25,0.75){}}
+	\end{picture}}}
+
+\newcommand{\abs}{{\rm abs}}

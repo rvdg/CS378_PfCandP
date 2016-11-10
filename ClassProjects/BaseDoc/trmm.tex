@@ -1,0 +1,30 @@
+\chapter{Cases}
+Triangular matrix-matrix multiplication ({\sc Trmm}) 
+is matrix-matrix multiplication where one of the matrices is square and (lower or upper) triangular.
+
+The full set of 
+triangular matrix-matrix multiplication cases 
+is denoted by {\sc Trmm\_$\Box \Box \Box \Box $}, 
+where the letters in the four boxes denote whether the 
+triangular matrix is on the {\sc l}eft or {\sc r}ight,
+is {\sc l}ower or {\sc u}pper triangular, 
+is {\sc n}ot transposed or {\sc t}ransposed, 
+and has a {\sc n}onunit or {\sc u}nit diagonal:
+\[
+\begin{array}{c |  c   |   c  | c | c |} \cline{2-5}
+&
+{\mbox{\sc l} \mbox{\sc l} \Box \Box }
+&
+{\mbox{\sc l} \mbox{\sc u} \Box \Box }
+&
+{\mbox{\sc r} \mbox{\sc l} \Box \Box }
+&
+{\mbox{\sc r} \mbox{\sc u} \Box \Box }
+  \\
+\hline
+\multicolumn{1}{|c |}{ \Box \Box \mbox{\sc n} \Box} & B = L B & B = U B & B = B L & B = B U \\
+\hline
+\multicolumn{1}{|c |}{ \Box \Box \mbox{\sc t} \Box} & B = L^T B & B = U^T B & B = B L^T & B = B U^T \\
+\hline
+\end{array}
+\]

@@ -1,0 +1,28 @@
+\chapter{Cases}
+Symmetric rank-2k update ({\sc Syr2k}) 
+is matrix-matrix multiplication of two matrices where both the result and the transpose of that result are added to a symmetric matrix $ C $, stored in the lower or upper triangular part of the matrix.  
+
+The full set of 
+symmetric rank-2k cases 
+is denoted by {\sc Syr2k\_$\Box \Box $}, 
+where the letters in the two boxes denote whether the 
+matrices begin multiplied are {\sc n}ot transposed or {\sc t}ransposed, 
+and whether the matrix being updated is stored in the 
+{\sc l}ower or {\sc u}pper triangular part:
+\[
+\begin{array}{c |  c   |   c  | l |} \cline{2-4}
+&  {\mbox{\sc n} \Box  }
+&  {\mbox{\sc t} \Box  } 
+&
+\\ \cline{2-3}
+\hline
+\multicolumn{1}{|c |}{ \Box \mbox{\sc l}} & C := A B^T + B A^T + C &
+C := A^T B + B^T A + C 
+& \mbox{$ C $ symmetric, stored in lower triangle}\\
+\hline
+\multicolumn{1}{|c |}{ \Box \mbox{\sc u}} & C := A B^T B A^T + C &
+C := A^T B  + B^T A + C 
+& \mbox{$ C $ symmetric, stored in upper triangle}\\
+\hline
+\end{array}
+\]

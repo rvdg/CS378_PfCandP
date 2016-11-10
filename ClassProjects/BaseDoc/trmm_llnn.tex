@@ -1,0 +1,213 @@
+\chapter{$ B := L B $ --  \large Team: Robert van de Geijn}
+
+
+
+\section{Operation}
+
+Consider the operation
+\[
+B := L B 
+\]
+where $ L $ is a $ m \times m $ lower triangular matrix and $ B $ is a $ m \times n $ matrix.
+This is a special case of triangular 
+matrix-matrix multiplication, 
+with the {\sc l}ower triangular matrix on the {\sc left}, 
+and the triangular matrix is {\sc n}ot transposed.
+We will refer to this operation
+as {\sc Trmm\_llnn} where the {\sc llnn} stands for
+\underline{l}eft
+\underline{l}ower
+\underline{n}o-transpose
+\underline{n}onunit diagonal.
+The nonunit diagonal means we will use the entries of the matrix that are stored on the diagonal.
+
+\section{Precondition and postcondition}
+
+In the precondition 
+\[
+B = \widehat B
+\]
+$ \widehat B $ denotes the original contents of $ B $.
+This allows us to express the state upon completion, the postcondition, as
+\[
+B = L \widehat B.
+\]
+
+\section{Partitioned Matrix Expressions and loop invariants}
+
+There are two PMEs for this operation.
+
+\subsection{PME 1}
+
+To derive the second PME, partition
+\[
+L \rightarrow 
+\FlaTwoByTwo
+	{ L_{TL}}{ 0 }
+	{ L_{BL}}{ L_{BR}},
+	\quad \mbox{and} \quad
+B \rightarrow 
+\FlaTwoByOne
+	{ B_T }
+	{ B_B }.
+\]
+Substituting these into the postcondition
+yields
+\[
+\FlaTwoByOne
+{ B_T }
+{ B_B }
+=
+\FlaTwoByTwo
+{ L_{TL}}{ 0 }
+{ L_{BL}}{ L_{BR}} 
+\FlaTwoByOne
+{ \widehat B_T }
+{ \widehat B_B }
+\]
+or, equivalently,
+\[
+\FlaTwoByOne
+{ B_T }
+{ B_B }
+=
+\FlaTwoByOne
+{ L_{TL} \widehat B_T }
+{ L_{BL} \widehat B_T + L_{BR} \widehat B_B }
+\]
+so that, upon completion
+\[
+\FlaTwoByOneNoPar
+{ B_T = L_{TL} \widehat B_T }
+{ B_B = L_{BL} \widehat B_T + L_{BR} \widehat B_B }
+\]
+From this, we can choose two loop invariants:
+\begin{description}
+	\item
+	{\bf Invariant 1:}
+	$
+	\FlaTwoByOne
+	{ B_T = \widehat B_T }
+	{ B_B = L_{BR} \widehat B_B }
+	$. (The top part has been left alone and the bottom part has been partially computed).
+	\item
+	{\bf Invariant 2:}
+	$
+	\FlaTwoByOne
+	{ B_T = \widehat B_T }
+	{ B_B = L_{BL} \widehat B_T + L_{BR} \widehat B_B }
+	$. (The top part has been left alone and the bottom part has been completely computed).
+\end{description}
+
+\subsection{PME 2}
+
+To derive the second PME, partition
+\[
+B \rightarrow \FlaOneByTwo{ B_L }{ B_R }
+\]
+and does not partition $ L $.
+Substituting these into the postcondition
+yields
+\[
+\FlaOneByTwo{ B_L }{ B_R }
+=
+L \FlaOneByTwo{ \widehat B_L }{ \widehat B_R }
+\]
+or, equivalently,
+\[
+\FlaOneByTwo{ B_L }{ B_R }
+=
+\FlaOneByTwo{ L \widehat B_L }{ L \widehat B_R }
+\]
+so that, upon completion
+\[
+\FlaOneByTwoNoPar{B_L = L \widehat B_L}
+{B_R = L \widehat B_R}
+\]
+From this, we can choose two more loop invariants:
+\begin{description}
+	\item
+	{\bf Invariant 3:}
+	$\FlaOneByTwo{B_L = L \widehat B_L}
+	{B_R = \widehat B_R}$. (The left part has been completely finished and the right part has been left untouched).
+	\item
+	{\bf Invariant 4:}
+	$\FlaOneByTwo{B_L = \widehat B_L}
+	{B_R = L \widehat B_R}$. (The left part has been completely finished and the right part has been left untouched).
+\end{description}
+
+\subsection{Notes}
+
+How do I decide to partition the matrices in the postcondition?
+
+\begin{itemize}
+	\item
+	Pick a matrix (operand), any matrix.  
+	\item 
+	If that matrix has 
+	\begin{itemize}
+		\item 
+	a triangular structure (in storage), then you want to either partition is into four quadrants, or not at all.  Symmetric matrices and triangular matrices have a triangular structure (in storage).
+		\item
+	no particular structure, then you partition it vertically (left-right), horizontally (top-bottom), or not at all.
+	\end{itemize}
+	\item
+	Next, partition the other matrices similarly, but conformally (meaning the 
+	resulting multiplications with the parts are legal).
+\end{itemize}
+Take our problem here:  $ B := L B $.
+Start by partitioning $ L $ in to quadrants:
+\[
+B = 
+\FlaTwoByTwo{ L_{TL} }{0}
+{ L_{BL}}{ L_{BR} }
+		\widehat B.
+\]
+Now, the way partitioned matrix multiplication works, this doesn't make sense:
+\[
+B = 
+\begin{array}[t]{c}
+\underbrace{
+\FlaTwoByTwo{ L_{TL} }{0}
+{ L_{BL}}{ L_{BR}}
+		\widehat B.
+	}\\
+	\FlaTwoByOne
+	{ L_{TL} \times \mbox{something} + 0 \times \mbox{something}}
+	{ L_{BL} \times \mbox{something} + L_{BR} \times \mbox{something}}
+	\end{array}.
+\]
+So, we need to also partition $ B $ into a top part and a bottom part:
+\[
+\FlaTwoByOne{ B_T}{B_B}
+= 
+\begin{array}[t]{c}
+\underbrace{
+	\FlaTwoByTwo{ L_{TL} }{0}
+{ L_{BL}}{ L_{BR} }
+		\FlaTwoByOne{ \widehat B_T}{\widehat B_B}.
+	}\\
+	\FlaTwoByOne
+	{ L_{TL}  B_T + B_B}
+	{ L_{BL}  B_T + L_{BR}  B_B}
+	\end{array}.
+\]
+
+Alternatively, what if you don't partition $ L $?  You have to partition {\em something} so let's try partitioning $ B $:
+\[
+\FlaTwoByOne{ B_T}{B_B}
+=
+L 
+\FlaTwoByOne{ \widehat B_T}{\widehat B_B}
+\]
+But that doesn't work...
+Instead
+\[
+\FlaOneByTwo{ B_L}{B_R}
+=
+L 
+\FlaOneByTwo{ \widehat B_L}{\widehat B_R}
+=
+\FlaOneByTwo{ L \widehat B_L}{ L \widehat B_R}
+\]
+works just fine.  

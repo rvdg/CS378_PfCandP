@@ -1,0 +1,28 @@
+\chapter{Cases}
+Symmetric matrix-matrix multiplication ({\sc Symm}) 
+is matrix-matrix multiplication where one of the matrices is square and symmetric, stored in the lower or upper triangular part of the matrix.  
+
+The full set of 
+symmetric matrix-matrix multiplication cases 
+is denoted by {\sc Symm\_$\Box \Box $}, 
+where the letters in the two boxes denote whether the 
+symmetric matrix is on the {\sc l}eft or {\sc r}ight, 
+and is stored in the 
+{\sc l}ower or {\sc u}pper triangular part of that matrix:
+\[
+\begin{array}{c |  c   |   c  | l |} \cline{2-4}
+&  {\mbox{\sc l} \Box  }
+&  {\mbox{\sc r} \Box  } 
+&
+\\ \cline{2-3}
+\hline
+\multicolumn{1}{|c |}{ \Box \mbox{\sc l}} & C := A B + C &
+C := B A + C 
+& \mbox{$ A $ symmetric, stored in lower triangle}\\
+\hline
+\multicolumn{1}{|c |}{ \Box \mbox{\sc u}} & C := A B + C &
+C := B A + C 
+& \mbox{$ A $ symmetric, stored in upper triangle}\\
+\hline
+\end{array}
+\]
